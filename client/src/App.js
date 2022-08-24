@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import RiderCard from "./Components/RiderCard";
+import TeamContainer from "./Components/TeamContainer";
+import NewTeamForm from "./Components/NewTeamForm";
+// import { Routes, Route } from "react-router-dom";
 
 function App() {
+  const [riders, setRiders] = useState([]);
+  const [teams, setTeams] = useState([]);
+  useEffect(() => {
+    fetch("/teams")
+      .then((resp) => {
+        console.log(resp);
+        return resp.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setTeams([...data]);
+      });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NewTeamForm />
+      {/* <Routes>
+        <Route path="/riders" element={<RiderCard riders={riders} />} />
+        <Route path="/teams" element={<TeamContainer teams={teams} />} /> 
+        <Route path="/new-team" element={<NewTeamForm />} /> 
+      </Routes> */}
     </div>
   );
 }
