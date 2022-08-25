@@ -12,8 +12,11 @@ function NewTeamForm({}) {
   });
 
   const handleInputChange = (e) => {
-    
 
+    const copy = 
+
+
+    setFormData()
   }
 
   return (
